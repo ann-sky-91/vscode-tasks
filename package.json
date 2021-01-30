@@ -1,0 +1,11 @@
+{
+    "name": "vscode-tasks",
+    "description": "vscode task swither",
+    "license": "UNLICENSED",
+    "scripts": {},
+    "bin": {
+        "vscode-tasks": "bin/cli.js"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
