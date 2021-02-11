@@ -1,7 +1,13 @@
 {
     "name": "vscode-tasks",
     "description": "vscode task swither",
-    "license": "UNLICENSED",
+    "version": "1.0.1",
+    "license": "ISC",
+    "author": {
+        "name": "Anya Simba",
+        "email": "anyasimba@yandex.ru",
+        "url": "https://career.habr.com/anyasimba"
+    },
     "scripts": {},
     "bin": {
         "vscode-tasks": "bin/cli.js"

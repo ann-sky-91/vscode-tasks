@@ -31,9 +31,8 @@ function setModuleTasks(modulePath) {
         tasksConfig.tasks.push({
             type: 'npm',
             script,
-            label: moduleDir === '' ? script : `${script} - ${moduleDir}`,
+            label: moduleDir === '' || moduleDir === '.' ? script : `${script} - ${moduleDir}`,
             path: `${moduleDir}/`,
-            detail: module.scripts[script],
             group: 'build',
         })
     })
@@ -68,12 +67,10 @@ function getModulesList() {
     return results
 
     function walk(dir) {
-        // console.log('walk', dir)
         fs.readdirSync(dir).forEach(file => {
             if (exclude.includes(file)) {
                 return
             }
-            // console.log('file', file)
             const filePath = path.join(dir, file)
             const stat = fs.statSync(filePath)
             if (stat.isDirectory()) {
