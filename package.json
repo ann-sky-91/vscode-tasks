@@ -1,7 +1,7 @@
 {
     "name": "vscode-tasks",
     "description": "vscode task swither",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "license": "ISC",
     "author": {
         "name": "Anya Simba",

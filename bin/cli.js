@@ -44,6 +44,13 @@ function setTasks() {
 
     tasksConfig.tasks.push({
         type: 'shell',
+        label: `(update)`,
+        command: `vscode-tasks`,
+        group: 'build',
+    })
+
+    tasksConfig.tasks.push({
+        type: 'shell',
         label: `(clear)`,
         command: `vscode-tasks '\\clear'`,
         group: 'build',
