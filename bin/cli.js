@@ -13,7 +13,10 @@ const tasksConfig = {
 
 const modulePath = process.argv[2]
 
-if (!modulePath) {
+if (modulePath === '\\clear') {
+    fs.unlinkSync('.vscode/tasks.json')
+    return
+} else if (!modulePath) {
     setTasks()
 } else {
     setModuleTasks(modulePath)
@@ -34,6 +37,13 @@ function setTasks() {
             command: `vscode-tasks "${modulePath}"`,
             group: 'build',
         })
+    })
+
+    tasksConfig.tasks.push({
+        type: 'shell',
+        label: `(clear)`,
+        command: `vscode-tasks '\\clear'`,
+        group: 'build',
     })
 }
 
