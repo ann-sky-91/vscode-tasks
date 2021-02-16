@@ -15,6 +15,9 @@ const modulePath = process.argv[2]
 
 if (modulePath === '\\clear') {
     fs.unlinkSync('.vscode/tasks.json')
+    if (fs.readdirSync('.vscode').length === 0) {
+        fs.rmdirSync('.vscode')
+    }
     return
 } else if (!modulePath) {
     setTasks()
