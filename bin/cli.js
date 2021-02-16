@@ -13,16 +13,29 @@ const tasksConfig = {
 
 const modulePath = process.argv[2]
 
-if (modulePath) {
-    setModuleTasks(modulePath)
-} else {
+if (!modulePath) {
     setTasks()
+} else {
+    setModuleTasks(modulePath)
 }
 
 if (!fs.existsSync('.vscode')) {
     fs.mkdirSync('.vscode')
 }
 fs.writeFileSync('.vscode/tasks.json', JSON.stringify(tasksConfig))
+
+function setTasks() {
+    const modules = getModulesList().map(module => path.relative(cwd, module))
+    modules.forEach(modulePath => {
+        const module = getModule(modulePath)
+        tasksConfig.tasks.push({
+            type: 'shell',
+            label: `> ${module.name}`,
+            command: `vscode-tasks "${modulePath}"`,
+            group: 'build',
+        })
+    })
+}
 
 function setModuleTasks(modulePath) {
     const module = getModule(modulePath)
@@ -38,22 +51,9 @@ function setModuleTasks(modulePath) {
     })
     tasksConfig.tasks.push({
         type: 'shell',
-        label: '<-',
+        label: '(back)',
         command: `vscode-tasks`,
         group: 'build',
-    })
-}
-
-function setTasks() {
-    const modules = getModulesList().map(module => path.relative(cwd, module))
-    modules.forEach(modulePath => {
-        const module = getModule(modulePath)
-        tasksConfig.tasks.push({
-            type: 'shell',
-            label: module.name,
-            command: `vscode-tasks "${modulePath}"`,
-            group: 'build',
-        })
     })
 }
 
