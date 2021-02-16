@@ -22,7 +22,7 @@ if (!modulePath) {
 if (!fs.existsSync('.vscode')) {
     fs.mkdirSync('.vscode')
 }
-fs.writeFileSync('.vscode/tasks.json', JSON.stringify(tasksConfig))
+fs.writeFileSync('.vscode/tasks.json', JSON.stringify(tasksConfig, null, 4))
 
 function setTasks() {
     const modules = getModulesList().map(module => path.relative(cwd, module))
