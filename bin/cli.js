@@ -34,9 +34,11 @@ function setTasks() {
     const modules = getModulesList().map(module => path.relative(cwd, module))
     modules.forEach(modulePath => {
         const module = getModule(modulePath)
+        const moduleFolderPath = path.dirname(modulePath)
         tasksConfig.tasks.push({
             type: 'shell',
             label: `> ${module.name}`,
+            detail: `vscode-tasks ${moduleFolderPath}`,
             command: `vscode-tasks "${modulePath}"`,
             group: 'build',
         })
@@ -45,6 +47,7 @@ function setTasks() {
     tasksConfig.tasks.push({
         type: 'shell',
         label: `(update)`,
+        detail: `vscode-tasks`,
         command: `vscode-tasks`,
         group: 'build',
     })
@@ -52,6 +55,7 @@ function setTasks() {
     tasksConfig.tasks.push({
         type: 'shell',
         label: `(clear)`,
+        detail: `vscode-tasks clear`,
         command: `vscode-tasks '\\clear'`,
         group: 'build',
     })
@@ -65,6 +69,7 @@ function setModuleTasks(modulePath) {
             type: 'npm',
             script,
             label: moduleDir === '' || moduleDir === '.' ? script : `${script} - ${moduleDir}`,
+            detail: module.scripts[script],
             path: `${moduleDir}/`,
             group: 'build',
         })
@@ -72,6 +77,7 @@ function setModuleTasks(modulePath) {
     tasksConfig.tasks.push({
         type: 'shell',
         label: '(back)',
+        detail: `vscode-tasks`,
         command: `vscode-tasks`,
         group: 'build',
     })
